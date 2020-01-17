@@ -252,39 +252,80 @@ app.get('/Plata', function (req, res) {
 
 app.post('/platestee', function (req, res) {
   console.log(req.body);
+
   var comandaInfo = req.body;
   var sumaTotala = 0;
   var numarProduse = 0;
   var cantitati = app.get('data');
-  produse.findOneAndUpdate({ cos: true }, {cos: false}, function (err, produse) {
-    for(var i = 0; i < produse.length; i++) {
-      sumaTotala = sumaTotala + produse[i].pret * parseInt(cantitati[i]);
-      numarProduse = numarProduse + parseInt(cantitati[i]);
-    }
-  });
+  if (cantitati == null) {
 
-  if (!comandaInfo.nume || !comandaInfo.prenume || !comandaInfo.telefon || !comandaInfo.email || !comandaInfo.adresa) {
-    res.render('Plata', { esteAdmin: esteAdmin,
-      message: "Completeaza formularul complet", tip_mesaj: "error"
+    produse.find({ cos: true }, function (err, produse) {
+      for (var i = 0; i < produse.length; i++) {
+        console.log(produse[i].pret);
+        sumaTotala = sumaTotala + produse[i].pret;
+        numarProduse = numarProduse + 1;
+      }
+
+      if (!comandaInfo.nume || !comandaInfo.prenume || !comandaInfo.telefon || !comandaInfo.email || !comandaInfo.adresa) {
+        res.render('Plata', {
+          esteAdmin: esteAdmin,
+          message: "Completeaza formularul complet", tip_mesaj: "error"
+        });
+      } else {
+        var newComanda = new comenzi({
+          nume: comandaInfo.nume,
+          prenume: comandaInfo.prenume,
+          telefon: comandaInfo.telefon,
+          email: comandaInfo.email,
+          adresa: comandaInfo.adresa,
+          suma: sumaTotala,
+          numar: numarProduse,
+          data: Date()
+        });
+
+        newComanda.save(function (err, comanda) {
+
+          if (err)
+            res.render('Plata', { esteAdmin: esteAdmin, message: "Eroare in baza de date, poate nu ai nimic in cos", tip_mesaj: "error" });
+          else
+            res.render('Plata', { esteAdmin: esteAdmin, message: "Comanda finalizata", tip_mesaj: "success" });
+        });
+      }
     });
   } else {
-    var newComanda = new comenzi({
-      nume: comandaInfo.nume,
-      prenume: comandaInfo.prenume,
-      telefon: comandaInfo.telefon,
-      email: comandaInfo.email,
-      adresa: comandaInfo.adresa,
-      suma: sumaTotala,
-      numar: numarProduse,
-      data: Date()
-    });
+    produse.find({ cos: true }, function (err, produse) {
+      for (var i = 0; i < produse.length; i++) {
+        console.log(cantitati[i]);
+        console.log(produse[i].pret);
+        sumaTotala = sumaTotala + produse[i].pret * parseInt(cantitati[i]);
+        numarProduse = numarProduse + parseInt(cantitati[i]);
+      }
 
-    newComanda.save(function (err, comanda) {
+      if (!comandaInfo.nume || !comandaInfo.prenume || !comandaInfo.telefon || !comandaInfo.email || !comandaInfo.adresa) {
+        res.render('Plata', {
+          esteAdmin: esteAdmin,
+          message: "Completeaza formularul complet", tip_mesaj: "error"
+        });
+      } else {
+        var newComanda = new comenzi({
+          nume: comandaInfo.nume,
+          prenume: comandaInfo.prenume,
+          telefon: comandaInfo.telefon,
+          email: comandaInfo.email,
+          adresa: comandaInfo.adresa,
+          suma: sumaTotala,
+          numar: numarProduse,
+          data: Date()
+        });
 
-      if (err)
-        res.render('Plata', { esteAdmin: esteAdmin, message: "Eroare in baza de date, poate nu ai nimic in cos", tip_mesaj: "error" });
-      else
-        res.render('Plata', { esteAdmin: esteAdmin, message: "Comanda finalizata", tip_mesaj: "success" });
+        newComanda.save(function (err, comanda) {
+
+          if (err)
+            res.render('Plata', { esteAdmin: esteAdmin, message: "Eroare in baza de date, poate nu ai nimic in cos", tip_mesaj: "error" });
+          else
+            res.render('Plata', { esteAdmin: esteAdmin, message: "Comanda finalizata", tip_mesaj: "success" });
+        });
+      }
     });
   }
 });
