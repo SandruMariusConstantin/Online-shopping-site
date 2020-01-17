@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MangaShop - Sandru's shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Magazin vanzare manga online" />
+    <meta name="og:description" content="Poti cumpara manga online la un pret foarte redus" />
+    <meta property="og:image" content="themes/images/logo.jpeg" />
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="themes/css/bootstrappage.css" rel="stylesheet" />
+
+
+    <link href="themes/css/flexslider.css" rel="stylesheet" />
+    <link href="themes/css/main.css" rel="stylesheet" />
+
+    <script src="themes/js/jquery-1.7.2.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="themes/js/superfish.js"></script>
+    <script src="themes/js/jquery.scrolltotop.js"></script>
+</head>
+
+<body>
+    <div id="top-bar" class="container">
+        <div class="row">
+            <div class="span4">
+                <form method="POST" class="search_form">
+                    <input type="text" class="input-block-level search-query" Placeholder="eg. Attack on titan">
+                </form>
+            </div>
+            <div class="span8">
+                <div class="account pull-right">
+                    <ul class="user-menu">
+                        <li><a href="index">Acasa</a></li>
+                        <li><a href="/Produse">Produse</a></li>
+                        <li><a href="promotii">Promotii</a></li>
+                        <li><a href="CosulMeu">Cosul Meu</a></li>
+                        <li><a href="Logare">Logare</a></li>
+                        <li><a href="Recenzii">Recenzii</a></li>
+                        <% if(esteAdmin === false){ %>
+                        <li><a href="Administrare" id="ascunde" style="display: none">Administrare</a></li>
+                        <% } else{ %>
+                        <li><a href="Administrare" id="ascunde" style="display: block">Administrare</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper" class="container">
+        <section class="navbar main-menu">
+            <div class="navbar-inner main-menu">				
+                <a href="index" class="logo pull-left"><img src="themes/images/logo.jpeg" class="site_logo" alt=""></a>
+        </section>				
+        <section class="header_text sub">
+        <img class="pageBanner" src="themes/images/banners/banner-2.jpeg" alt="New products" >
+        </section>
+        <section>
+            <style>
+                #myProgress {
+                  width: 100%;
+                  background-color: #ddd;
+                }
+                
+                #myBar {
+                  width: 0%;
+                  height: 30px;
+                  background-color: #4CAF50;
+                  text-align: center;
+                  line-height: 30px;
+                  color: white;
+                }
+            </style>
+            <div id="myProgress">
+                <div id="myBar" >0%</div>
+            </div>
+        </section>
+        <section>
+            <div class="accordion-inner">
+                <% if (tip_mesaj == "error") { %>
+                    <p style="color:red"><%- message %></p>
+                <% } %>
+                
+                <% if (tip_mesaj == "success") { %>
+                    <p style="color:green"><%- message %></p>
+                <% } %>
+
+                <form action="/recenzie_add" method="POST">
+                    <h4 class="text-success"> Iti place design-ul site-ului?</h4>
+                    <div class="form-check">
+                        <input type="checkbox" name="Intrebare1"  onclick="myFunction1()">
+                        <label class="form-check-label" for="Intrebare1" id="Intrebare1" >Da</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="Intrebare11" onclick="myFunction2()">
+                        <label class="form-check-label" for="Intrebare11" id="Intrebare11">Nu</label>
+                    </div>
+
+                    <h4 class="text-success"> Sunt destule produse?</h4>
+                    <div class="form-check">
+                        <input type="checkbox" name="Intrebare2" onclick="myFunction3()">
+                        <label class="form-check-label" for="Intrebare2" id="Intrebare2">Da</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="Intrebare22" onclick="myFunction4()">
+                        <label class="form-check-label" for="Intrebare22" id="Intrebare22">Nu</label>
+                    </div>
+
+                    <h4 class="text-success"> Iti place aspectul site-ului?</h4>
+                    <div class="form-check">
+                        <input type="checkbox" name="Intrebare3" onclick="myFunction5()">
+                        <label class="form-check-label" for="Intrebare3" id="Intrebare3">Da</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="Intrebare33" onclick="myFunction6()">
+                        <label class="form-check-label" for="Intrebare33" id="Intrebare33">Nu</label>
+                    </div>
+
+                    <h4 class="text-success"> Vei mai vizita site-ul?</h4>
+                    <div class="form-check">
+                        <input type="checkbox" name="Intrebare4" onclick="myFunction7()">
+                        <label class="form-check-label" for="Intrebare4" id="Intrebare4">Da</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="Intrebare44" onclick="myFunction8()">
+                        <label class="form-check-label" for="Intrebare44" id="Intrebare44">Nu</label>
+                    </div>
+
+                    <h4 class="text-success"> Se incarca destul de repede?</h4>
+                    <div class="form-check">
+                        <input type="checkbox" name="Intrebare5" onclick="myFunction9()">
+                        <label class="form-check-label" for="Intrebare5" id="Intrebare5">Da</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" name="Intrebare55" onclick="myFunction10()">
+                        <label class="form-check-label" for="Intrebare55" id="Intrebare55">Nu</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adauga recenzie</button>
+                </form>
+            </div>
+        </section>
+        <section id="footer-bar">
+            <div class="row">
+                <div class="span3">
+                    <h4>Navigheaza</h4>
+                    <ul class="nav">
+                        <li><a href="./Contact">Contacteaza-ma</a></li>
+                        <li><a href="./index">Acasa</a></li>
+                        <li><a href="./CosulMeu">CosulMeu</a></li>
+                        <li><a href="./Plata">Plata</a></li>
+                        <li><a href="./Logare">Logare</a></li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <h4>Contul meu</h4>
+                    <ul class="nav">
+                        <li><a href="#">Contul meu</a></li>
+                        <li><a href="#">Istoricul cumparaturilor</a></li>
+                        <li><a href="#">Wish List</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="span5">
+                    <br />
+                    <span class="social_icons">
+                        <a class="facebook" href="#">Facebook</a>
+                        <a class="twitter" href="#">Twitter</a>
+                        <a class="skype" href="#">Skype</a>
+                        <a class="vimeo" href="#">Vimeo</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+        <section id="copyright">
+            <span>Copyright 2020 Sandru Marius-Constantin.</span>
+        </section>
+    </div>
+
+    <script src="themes/js/ealmeu.js"></script>
+    <script src="themes/js/common.js"></script>
+    <script src="themes/js/jquery.flexslider-min.js"></script>
+</body>
+
+</html>

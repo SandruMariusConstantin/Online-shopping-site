@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>MangaShop - Sandru's shop</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta property="og:title" content="Magazin vanzare manga online" />
+	<meta name="og:description" content="Poti cumpara manga online la un pret foarte redus" />
+	<meta property="og:image" content="themes/images/logo.jpeg" />
+
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="themes/css/bootstrappage.css" rel="stylesheet" />
+
+
+	<link href="themes/css/flexslider.css" rel="stylesheet" />
+	<link href="themes/css/main.css" rel="stylesheet" />
+	<link href="themes/css/animation.css" rel="stylesheet" />
+
+
+	<script src="themes/js/jquery-1.7.2.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="themes/js/superfish.js"></script>
+	<script src="themes/js/jquery.scrolltotop.js"></script>
+</head>
+
+<body>
+	<div id="top-bar" class="container">
+		<div class="row">
+			<div class="span4">
+				<form method="POST" class="search_form">
+					<input type="text" class="input-block-level search-query" Placeholder="eg. Attack on titan">
+				</form>
+			</div>
+			<div class="span8">
+				<div class="account pull-right">
+					<ul class="user-menu">
+						<li><a href="index">Acasa</a></li>
+						<li><a href="/Produse">Produse</a></li>
+						<li><a href="promotii">Promotii</a></li>
+						<li><a href="CosulMeu">Cosul Meu</a></li>
+						<li><a href="Logare">Logare</a></li>
+						<li><a href="Recenzii">Recenzii</a></li>
+						<% if(esteAdmin === false){ %>
+							<li><a href="Administrare" id="ascunde" style="display: none" >Administrare</a></li>
+						<% } else{ %>
+							<li><a href="Administrare" id="ascunde" style="display: block" >Administrare</a></li>
+						<% } %>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="wrapper" class="container">
+		<section class="navbar main-menu">
+			<div class="navbar-inner main-menu">
+				<a href="index" class="logo pull-left"><img src="themes/images/logo.jpeg" class="site_logo" alt=""></a>
+			</div>
+		</section>
+		<section class="homepage-slider" id="home-slider">
+			<div class="flexslider">
+				<ul class="slides">
+					<li class="miscamisca">
+						<a href="detalii_produs/5e1f4fb604c1f8146b6d0337"><img src="themes/images/banners/banner-2.jpeg" alt="" /></a>
+					</li>
+					<li  class="miscamisca">
+						<a href="detalii_produs/5e1f508b04c1f8146b6d033c"><img src="themes/images/banners/banner-3.jpeg" alt="" /></a>
+					</li>
+					<li  class="miscamisca"> 
+						<a href="detalii_produs/5e1f4fe004c1f8146b6d0338"><img src="themes/images/banners/banner-1.jpeg" alt="" /></a>
+						<div class="intro">
+							<h1>Vanzare de sezon</h1>
+							<p><span>Pana la 50% reducere</span></p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<section class="header_text">
+			<h3>Nu rata sansa de a cumpara manga la un pret foarte mic.</h3>
+		</section>
+		<section class="main-content">
+			<div class="row">
+				<div class="span12">
+					<div class="row">
+						<div class="span12">
+							<h4 class="title">
+								<span class="pull-left"><span class="text"><span class="line">Ultimele
+											<strong>Produse</strong></span></span></span>
+								<span class="pull-right">
+									<a class="left button" href="#myCarousel" data-slide="prev"></a><a
+										class="right button" href="#myCarousel" data-slide="next"></a>
+								</span>
+							</h4>
+							<div id="myCarousel" class="myCarousel carousel slide">
+								<div class="carousel-inner">
+									<div class="active item">
+										<ul class="thumbnails">
+											<% var j = 0; var lungime = produse.length; %>
+											<% if(lungime > j + 3){ %>
+												<% for(var i=j; i<j+4; i++) {%>
+													<li class="span3">
+														<div class="product-box">
+															<span class="sale_tag"></span>
+															<p><a href="/detalii_produs/<%=produse[i]._id%>"><img
+																		src="<%=produse[i].imagine%>"
+																		alt="" /></a></p>
+															<a href="/detalii_produs/<%=produse[i]._id%>" class="title"><%=produse[i].nume%></a><br />
+															<a href="Produse" class="category">Vezi produse</a>
+															<p class="price"><%= produse[i].pret %> lei</p>
+														</div>
+													</li>
+												<% } %>
+												<% j = j + 4; %>
+											<% } else{ %>
+												<% for(var i=j; i<lungime; i++) {%>
+													<li class="span3">
+														<div class="product-box">
+															<span class="sale_tag"></span>
+															<p><a href="/detalii_produs/<%=produse[i]._id%>"><img
+																		src="<%=produse[i].imagine%>"
+																		alt="" /></a></p>
+															<a href="/detalii_produs/<%=produse[i]._id%>" class="title"><%=produse[i].nume%></a><br />
+															<a href="Produse" class="category">Vezi produse</a>
+															<p class="price"><%= produse[i].pret %> lei</p>
+														</div>
+													</li>
+													<% j = 0; %>
+												<% } %>
+											<% } %>
+										</ul>
+									</div>
+									<div class="item">
+										<ul class="thumbnails">
+											<% if(lungime > j + 3){ %>
+												<% for(var i=j; i<j+4; i++) {%>
+													<li class="span3">
+														<div class="product-box">
+															<span class="sale_tag"></span>
+															<p><a href="/detalii_produs/<%=produse[i]._id%>"><img
+																		src="<%=produse[i].imagine%>"
+																		alt="" /></a></p>
+															<a href="/detalii_produs/<%=produse[i]._id%>" class="title"><%=produse[i].nume%></a><br />
+															<a href="Produse" class="category">Vezi produse</a>
+															<p class="price"><%= produse[i].pret %> lei</p>
+														</div>
+													</li>
+												<% } %>
+												<% j = j + 4; %>
+											<% } else{ %>
+												<% for(var i=j; i<lungime; i++) {%>
+													<li class="span3">
+														<div class="product-box">
+															<span class="sale_tag"></span>
+															<p><a href="/detalii_produs/<%=produse[i]._id%>"><img
+																		src="<%=produse[i].imagine%>"
+																		alt="" /></a></p>
+															<a href="/detalii_produs/<%=produse[i]._id%>" class="title"><%=produse[i].nume%></a><br />
+															<a href="Produse" class="category">Vezi produse</a>
+															<p class="price"><%= produse[i].pret %> lei</p>
+														</div>
+													</li>
+													<% j = 0; %>
+												<% } %>
+											<% } %>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br />
+					<div class="row">
+						<div class="span12">
+							<h4 class="title">
+								<span class="pull-left"><span class="text"><span class="line">ULTIMELE
+											<strong>PRODUSE</strong></span></span></span>
+								<span class="pull-right">
+									<a class="left button" href="#myCarousel-2" data-slide="prev"></a><a
+										class="right button" href="#myCarousel-2" data-slide="next"></a>
+								</span>
+							</h4>
+							<div id="myCarousel-2" class="myCarousel carousel slide">
+								<div class="carousel-inner">
+									<div class="active item">
+										<ul class="thumbnails">
+											<% if(lungime > j + 3){ %>
+												<% for(var i=j; i<j+4; i++) {%>
+													<li class="span3">
+														<div class="product-box">
+															<span class="sale_tag"></span>
+															<p><a href="/detalii_produs/<%=produse[i]._id%>"><img
+																		src="<%=produse[i].imagine%>"
+																		alt="" /></a></p>
+															<a href="/detalii_produs/<%=produse[i]._id%>" class="title"><%=produse[i].nume%></a><br />
+															<a href="Produse" class="category">Vezi produse</a>
+															<p class="price"><%= produse[i].pret %> lei</p>
+														</div>
+													</li>
+												<% } %>
+												<% j = j + 4; %>
+											<% } else{ %>
+												<% for(var i=j; i<lungime; i++) {%>
+													<li class="span3">
+														<div class="product-box">
+															<span class="sale_tag"></span>
+															<p><a href="/detalii_produs/<%=produse[i]._id%>"><img
+																		src="<%=produse[i].imagine%>"
+																		alt="" /></a></p>
+															<a href="/detalii_produs/<%=produse[i]._id%>" class="title"><%=produse[i].nume%></a><br />
+															<a href="Produse" class="category">Vezi produse</a>
+															<p class="price"><%= produse[i].pret %> lei</p>
+														</div>
+													</li>
+													<% j = 0; %>
+												<% } %>
+											<% } %>
+										</ul>
+									</div>
+									<div class="item">
+										<ul class="thumbnails">
+											<% if(lungime > j + 3){ %>
+												<% for(var i=j; i<j+4; i++) {%>
+													<li class="span3">
+														<div class="product-box">
+															<span class="sale_tag"></span>
+															<p><a href="/detalii_produs/<%=produse[i]._id%>"><img
+																		src="<%=produse[i].imagine%>"
+																		alt="" /></a></p>
+															<a href="/detalii_produs/<%=produse[i]._id%>" class="title"><%=produse[i].nume%></a><br />
+															<a href="Produse" class="category">Vezi produse</a>
+															<p class="price"><%= produse[i].pret %> lei</p>
+														</div>
+													</li>
+												<% } %>
+												<% j = j + 4; %>
+											<% } else{ %>
+												<% for(var i=j; i<lungime; i++) {%>
+													<li class="span3">
+														<div class="product-box">
+															<span class="sale_tag"></span>
+															<p><a href="/detalii_produs/<%=produse[i]._id%>"><img
+																		src="<%=produse[i].imagine%>"
+																		alt="" /></a></p>
+															<a href="/detalii_produs/<%=produse[i]._id%>" class="title"><%=produse[i].nume%></a><br />
+															<a href="Produse" class="category">Vezi produse</a>
+															<p class="price"><%= produse[i].pret %> lei</p>
+														</div>
+													</li>
+													<% j = 0; %>
+												<% } %>
+											<% } %>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row feature_box">
+						<div class="span4">
+							<div class="service">
+								<div class="responsive">
+									<img src="themes/images/feature_img_2.png" alt="" />
+									<h4>DESIGN <strong>MODERN</strong></h4>
+								</div>
+							</div>
+						</div>
+						<div class="span4">
+							<div class="service">
+								<div class="customize">
+									<img src="themes/images/feature_img_1.png" alt="" />
+									<h4>LIVRARE <strong>GRATUITA</strong></h4>
+								</div>
+							</div>
+						</div>
+						<div class="span4">
+							<div class="service">
+								<div class="support">
+									<img src="themes/images/feature_img_3.png" alt="" />
+									<h4>24/7 <strong>SUPORT CONTINUU</strong></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="footer-bar">
+			<div class="row">
+				<div class="span3">
+					<h4>Navigheaza</h4>
+					<ul class="nav">
+						<li><a href="./Contact">Contacteaza-ma</a></li>
+						<li><a href="./index">Acasa</a></li>
+						<li><a href="./CosulMeu">CosulMeu</a></li>
+						<li><a href="./Plata">Plata</a></li>
+						<li><a href="./Logare">Logare</a></li>
+					</ul>
+				</div>
+				<div class="span4">
+					<h4>Contul meu</h4>
+					<ul class="nav">
+						<li><a href="#">Contul meu</a></li>
+						<li><a href="#">Istoricul cumparaturilor</a></li>
+						<li><a href="#">Wish List</a></li>
+						<li><a href="#">Newsletter</a></li>
+					</ul>
+				</div>
+				<div class="span5">
+					<br />
+					<span class="social_icons">
+						<a class="facebook" href="#">Facebook</a>
+						<a class="twitter" href="#">Twitter</a>
+						<a class="skype" href="#">Skype</a>
+						<a class="vimeo" href="#">Vimeo</a>
+					</span>
+				</div>
+			</div>
+		</section>
+		<section id="copyright">
+			<span>Copyright 2020 Sandru Marius-Constantin.</span>
+		</section>
+	</div>
+	<script src="themes/js/common.js"></script>
+	<script src="themes/js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$(document).ready(function () {
+				$('.flexslider').flexslider({
+					animation: "fade",
+					slideshowSpeed: 4000,
+					animationSpeed: 600,
+					controlNav: false,
+					directionNav: true,
+					controlsContainer: ".flex-container" // the container that holds the flexslider
+				});
+			});
+		});
+	</script>
+
+</body>
+
+</html>

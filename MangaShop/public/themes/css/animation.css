@@ -1,0 +1,35 @@
+h3 {
+    animation-duration: 8s;
+    animation-name: slidein;
+    animation-iteration-count: infinite;
+}
+
+@keyframes slidein {
+  0% {
+    margin-left: 0%;
+  }
+  50% {
+    margin-left: 300px;
+  }
+  100% {
+    margin-left: 0%;
+  }
+}
+
+.miscamisca {
+  animation-duration: 5s;
+  animation-name: slidein2;
+  animation-iteration-count: infinite;
+}
+
+@keyframes slidein2 {
+0% {
+  margin-left: 0%;
+}
+50% {
+  margin-left: 100px;
+}
+100% {
+  margin-left: 0%;
+}
+}

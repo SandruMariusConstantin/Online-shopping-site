@@ -1,0 +1,17 @@
+{
+  "name": "manga_shop",
+  "version": "1.0.0",
+  "description": "An online shop",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "test"
+  },
+  "keywords": [
+    "manga"
+  ],
+  "author": "Sandru",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {}
+}

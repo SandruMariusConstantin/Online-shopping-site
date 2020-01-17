@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>MangaShop - Sandru's shop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Magazin vanzare manga online" />
+    <meta name="og:description" content="Poti cumpara manga online la un pret foarte redus" />
+    <meta property="og:image" content="themes/images/logo.jpeg" />
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="themes/css/bootstrappage.css" rel="stylesheet" />
+
+
+    <link href="themes/css/flexslider.css" rel="stylesheet" />
+    <link href="themes/css/main.css" rel="stylesheet" />
+
+
+    <script src="themes/js/jquery-1.7.2.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="themes/js/superfish.js"></script>
+    <script src="themes/js/jquery.scrolltotop.js"></script>
+</head>
+
+<body>
+    <div id="top-bar" class="container">
+        <div class="row">
+            <div class="span4">
+                <form method="POST" class="search_form">
+                    <input type="text" class="input-block-level search-query" Placeholder="eg. Attack on titan">
+                </form>
+            </div>
+            <div class="span8">
+                <div class="account pull-right">
+                    <ul class="user-menu">
+                        <li><a href="index">Acasa</a></li>
+                        <li><a href="Produse">Produse</a></li>
+                        <li><a href="promotii">Promotii</a></li>
+                        <li><a href="CosulMeu">Cosul Meu</a></li>
+						<li><a href="Logare">Logare</a></li>
+						<li><a href="Recenzii">Recenzii</a></li>
+						<li><a href="Administrare" id="ascunde" style="display: block" >Administrare</a></li>
+						
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wrapper" class="container">
+        <section class="navbar main-menu">
+            <div class="navbar-inner main-menu">
+                <a href="index" class="logo pull-left"><img src="themes/images/logo.jpeg" class="site_logo" alt=""></a>
+            </div>
+        </section>
+        <section class="header_text sub">
+            <img class="pageBanner" src="themes/images/banners/banner-2.jpeg" alt="New products">
+        </section>
+        <section class="main-content">
+            <div class="row">
+                <div class="span12">
+                    <div>
+                        <button class="button" type="button"> <a href="/delogaree">Delogheaza-te</a> </button>
+                        <p>&nbsp;</p>
+                    </div>
+                    <div class="accordion" id="accordion2">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">Adauga un produs</a>
+                            </div>
+                            <div id="collapseOne" class="accordion-body in collapse">
+                                <div class="accordion-inner">
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                            
+                                            <h5>Adauga un produs</h5>  
+                            
+                                            <form action="/produs_add" method="POST">
+                                                <div class="form-group">
+                                                  <label for="nume">Nume produs</label>
+                                                  <input type="text" class="form-control" id="nume" placeholder="Nume produs" name="nume">
+                                                </div>
+                                                <div class="form-group">
+                                                  <label for="pret">Pret produs</label>
+                                                  <input type="text" class="form-control" id="pret" placeholder="Pret produs" name="pret">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="imagine">Imagine produs</label>
+                                                    <input type="text" class="form-control" id="imagine" placeholder="Imagine produs" name="imagine">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Adauga</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">Istoric comenzi</a>
+                            </div>
+                            <div id="collapseTwo" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <h5>Isotric comenzi</h5>
+                                            <% for(var i=0; i<comenzi.length; i++) {%>
+                                                <h6>Comanda <%=i+1%>:</h6>
+                                                <ul class="list-unstyled">
+                                                    <li>Nume: <%=comenzi[i].nume%></li>
+                                                    <li>Prenume: <%=comenzi[i].prenume%></li>
+                                                    <li>Telefon: <%=comenzi[i].telefon%></li> 
+                                                    <li>E-mail: <%=comenzi[i].email%></li>
+                                                    <li>Adresa: <%=comenzi[i].adresa%></li>
+                                                    <li>Total comanda: <%=comenzi[i].suma%></li>
+                                                    <li>Numar produse: <%=comenzi[i].numar%></li>
+                                                    <li>Data plasare comanda: <%=comenzi[i].data%></li>                           
+                                                </ul>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">Istoric recenzii</a>
+                            </div>
+                            <div id="collapseThree" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <h5>Isotric recenzii</h5>
+                                            <% for(var i=0; i<recenzii.length; i++) {%>
+                                                <h6>Recenzia <%=i+1%>:</h6>
+                                                <ul class="list-unstyled">
+                                                    <li>Iti place design-ul site-ului?</li>
+                                                    <% if (recenzii[i].Intrebare1) { %>
+                                                        <p>Da</p>
+                                                    <% } else { %>
+                                                        <p>Nu</p>
+                                                    <% } %>
+                                                    <li>Sunt destule produse?</li>
+                                                    <% if (recenzii[i].Intrebare2) { %>
+                                                        <p>Da</p>
+                                                    <% } else { %>
+                                                        <p>Nu</p>
+                                                    <% } %>
+                                                    <li>Iti place aspectul site-ului?</li>
+                                                    <% if (recenzii[i].Intrebare3) { %>
+                                                        <p>Da</p>
+                                                    <% } else { %>
+                                                        <p>Nu</p>
+                                                    <% } %>
+                                                    <li>Vei mai vizita site-ul?</li>
+                                                    <% if (recenzii[i].Intrebare4) { %>
+                                                        <p>Da</p>
+                                                    <% } else { %>
+                                                        <p>Nu</p>
+                                                    <% } %>
+                                                    <li>Se incarca destul de repede?</li>
+                                                    <% if (recenzii[i].Intrebare5) { %>
+                                                        <p>Da</p>
+                                                    <% } else { %>
+                                                        <p>Nu</p>
+                                                    <% } %>                                                   
+                                                </ul>
+                                            <% } %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>				
+                </div>
+            </div>
+        </section>
+        
+        <section id="footer-bar">
+            <div class="row">
+                <div class="span3">
+                    <h4>Navigheaza</h4>
+                    <ul class="nav">
+                        <li><a href="./Contact">Contacteaza-ma</a></li>
+                        <li><a href="./index">Acasa</a></li>
+                        <li><a href="./CosulMeu">CosulMeu</a></li>
+                        <li><a href="./Plata">Plata</a></li>
+                        <li><a href="./Logare">Logare</a></li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <h4>Contul meu</h4>
+                    <ul class="nav">
+                        <li><a href="#">Contul meu</a></li>
+                        <li><a href="#">Istoricul cumparaturilor</a></li>
+                        <li><a href="#">Wish List</a></li>
+                        <li><a href="#">Newsletter</a></li>
+                    </ul>
+                </div>
+                <div class="span5">
+                    <br />
+                    <span class="social_icons">
+                        <a class="facebook" href="#">Facebook</a>
+                        <a class="twitter" href="#">Twitter</a>
+                        <a class="skype" href="#">Skype</a>
+                        <a class="vimeo" href="#">Vimeo</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+        <section id="copyright">
+            <span>Copyright 2020 Sandru Marius-Constantin.</span>
+        </section>
+    </div>
+    <script src="themes/js/common.js"></script>
+    <script src="themes/js/jquery.flexslider-min.js"></script>
+</body>
+
+</html>
