@@ -6,6 +6,7 @@ Online web application using node.js, express, mongoDB and EJS Templating Engine
 * Node
 * Express
 * MongoDB
+* And others :)
 
 ## Installation
 
